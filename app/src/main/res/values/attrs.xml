@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ScrimInsetsView">
+        <attr name="SIinsetForeground" format="reference|color" />
+    </declare-styleable>
+    <declare-styleable name="NavigationBarView">
+        <attr name="navtitle" format="reference|string"/>
+        <attr name="leftbar_norbg" format="reference"/>
+        <attr name="leftbar_prebg" format="reference"/>
+        <attr name="rightbar_norbg" format="reference"/>
+        <attr name="rightbar_prebg" format="reference"/>
+        <!--是否从状态栏算起-->
+        <attr name="hasstatubar" format="boolean"/>
+    </declare-styleable>
+</resources>
