@@ -1,10 +1,18 @@
 package com.huwei.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.huwei.activity.AddProjectActivity;
+import com.huwei.activity.NewProjectActivity;
+import com.huwei.activity.R;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -20,6 +28,7 @@ public class PathListAdapter extends RecyclerView.Adapter<PathListAdapter.ViewHo
     private ArrayList<File> list=null;
     private FileFilter filter=null;
     public PathListAdapter(Context context) {
+        this.context=context;
         inflater = LayoutInflater.from(context);
         list=new ArrayList<>();
         filter=new FileFilter() {
@@ -37,12 +46,15 @@ public class PathListAdapter extends RecyclerView.Adapter<PathListAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        View view=inflater.inflate(R.layout.pathlist_item_layout,parent,false);
+        ViewHolder holder=new ViewHolder(view);
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        File file=list.get(position);
+        holder.tv_name.setText(file.getAbsoluteFile().getName());
     }
 
     @Override
@@ -53,10 +65,38 @@ public class PathListAdapter extends RecyclerView.Adapter<PathListAdapter.ViewHo
         return 0;
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        public TextView tv_name=null;
+        public ImageView iv_arrow=null;
         public ViewHolder(View itemView) {
             super(itemView);
+//            View view1=itemView.findViewWithTag("name_"+getAdapterPosition());
+//            View view2=itemView.findViewWithTag("img_"+getAdapterPosition());
+//            if(view1==null){
+                tv_name=(TextView)itemView.findViewById(R.id.tv_path_name);
+                tv_name.setTag("name_"+getAdapterPosition());
+//            }else{
+//                tv_name=(TextView)view1;
+//            }
+//            if(view2==null){
+                iv_arrow=(ImageView)itemView.findViewById(R.id.iv_path_arrow);
+                iv_arrow.setTag("img_"+getAdapterPosition());
+//            }else{
+//                iv_arrow=(ImageView)view2;
+//            }
+            itemView.setOnClickListener(this);
+            itemView.setTag(getAdapterPosition());
+        }
+
+        @Override
+        public void onClick(View v) {
+            AddProjectActivity activity=(AddProjectActivity)PathListAdapter.this.context;
+            Bundle bundle=new Bundle();
+//            int position=(int)v.getTag();
+//            bundle.putSerializable("local",list.get(getLayoutPosition()));
+            Intent intent=new Intent(activity, NewProjectActivity.class);
+            intent.putExtras(bundle);
+            activity.startActivity(intent);
         }
     }
     public void setDataSource(final File file){

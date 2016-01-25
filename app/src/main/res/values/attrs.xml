@@ -5,10 +5,10 @@
     </declare-styleable>
     <declare-styleable name="NavigationBarView">
         <attr name="navtitle" format="reference|string"/>
-        <attr name="leftbar_norbg" format="reference"/>
-        <attr name="leftbar_prebg" format="reference"/>
-        <attr name="rightbar_norbg" format="reference"/>
-        <attr name="rightbar_prebg" format="reference"/>
+        <attr name="leftbar_bg" format="reference"/>
+        <attr name="rightbar_bg" format="reference"/>
+        <attr name="leftbar_text" format="reference|string"/>
+        <attr name="rightbar_text" format="reference|string"/>
         <!--是否从状态栏算起-->
         <attr name="hasstatubar" format="boolean"/>
     </declare-styleable>
