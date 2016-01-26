@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/gray2">
 
 
     <LinearLayout
@@ -20,8 +20,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_main_project"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.0" />
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
 

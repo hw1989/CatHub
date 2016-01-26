@@ -21,4 +21,13 @@ public class ReadEntity {
     //文件路径
     @Field(name = "filelocal")
     private String filelocal;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private int id;
 }

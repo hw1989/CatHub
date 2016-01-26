@@ -12,4 +12,13 @@ public class SuffixEntity {
     //文件的后缀
     @Field(name = "suffix")
     private String suffix;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private int id;
 }

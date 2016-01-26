@@ -14,8 +14,8 @@ import org.wind.database.TableHelper;
  * Created by wei.hu on 2016/1/21.
  */
 public class InfoSqliteHelper extends SQLiteOpenHelper{
-    private InfoSqliteHelper helper=null;
-    public SQLiteDatabase getInstance(Context context,int version){
+    private static InfoSqliteHelper helper=null;
+    public static SQLiteDatabase getInstance(Context context,int version){
         if(helper==null){
             helper=new InfoSqliteHelper(context,"AppDataBase",null,version);
         }

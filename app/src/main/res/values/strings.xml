@@ -15,11 +15,18 @@
     <string name="new_project_c">C</string>
     <string name="new_project_csharp">C#</string>
     <string name="new_project_java">Java</string>
-    <string name="new_project_html">html</string>
+    <string name="new_project_html">Html</string>
     <string name="new_project_js">JavaScript</string>
     <string name="new_project_css">CSS</string>
+    <string name="new_project_unknow">Unknow</string>
     <string name="new_project_dir">项目路径:</string>
     <string name="new_project_describe">项目描述:</string>
     <string name="new_project_title_sure">确定</string>
     <string name="new_project_title_cancel">取消</string>
+    <string name="new_project_tip_nameisnull">项目名不能为空!</string>
+    <string name="new_project_tip_typeisnull">请选择项目类型!</string>
+    <string name="new_project_tip_fileisnull">获取项目路径失败!</string>
+    <string name="new_project_tip_addfail">项目添加失败!</string>
+    <string name="new_project_tip_addsuccess">项目添加成功!</string>
+    <string name="project_info_title">项目信息</string>
 </resources>

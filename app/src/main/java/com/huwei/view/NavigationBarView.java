@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -30,6 +31,8 @@ public class NavigationBarView extends RelativeLayout {
     private String righttext="";
     private Drawable leftimg=null;
     private Drawable rightimg=null;
+    //委托的事件
+    private NavigationBarDelegate delegate=null;
     public NavigationBarView(Context context) {
         super(context);
         initAttr(context, null, 0);
@@ -99,10 +102,9 @@ public class NavigationBarView extends RelativeLayout {
             parentLayout.setMargins(0, sbar, 0, 0);
         }
         this.setLayoutParams(parentLayout);
-//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-////        titleParams.addRule(RelativeLayout.CENTER_VERTICAL);//addRule参数对应RelativeLayout XML布局的属性
-//        setLeftBar(context, params);
-//        setRightBar(context,params);
+
+        setLeftBar(context);
+        setRightBar(context);
     }
 
     @Override
@@ -110,8 +112,20 @@ public class NavigationBarView extends RelativeLayout {
         super.onLayout(changed, l, t, r, b);
         initView(getContext());
     }
-    private void setLeftBar(Context context,RelativeLayout.LayoutParams params){
+    private void setLeftBar(Context context){
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.CENTER_VERTICAL);//addRule参数对应RelativeLayout XML布局的属性
+        params.setMargins(20,0,0,0);
+        //
         LinearLayout layout=new LinearLayout(context);
+        layout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(NavigationBarView.this.delegate!=null){
+                    NavigationBarView.this.delegate.leftBarClick();
+                }
+            }
+        });
         layout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         layout.setOrientation(LinearLayout.HORIZONTAL);
         ImageView imageView=new ImageView(context);
@@ -121,15 +135,32 @@ public class NavigationBarView extends RelativeLayout {
         layout.addView(imageView, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         TextView textView=new TextView(context);
         layout.addView(textView,new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        textView.setTextSize(18f);
+        textView.setTextColor(Color.WHITE);
         textView.setText(lefttext);
-        this.addView(layout,params);
+        this.addView(layout, params);
     }
-    private void setRightBar(Context context,RelativeLayout.LayoutParams params){
+    private void setRightBar(Context context){
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.CENTER_VERTICAL);//addRule参数对应RelativeLayout XML布局的属性
+        params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        params.setMargins(0,0,20,0);
+        //
         LinearLayout layout=new LinearLayout(context);
+        layout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(NavigationBarView.this.delegate!=null){
+                    NavigationBarView.this.delegate.rightBarClick();
+                }
+            }
+        });
         layout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         layout.setOrientation(LinearLayout.HORIZONTAL);
         TextView textView=new TextView(context);
         layout.addView(textView, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        textView.setTextSize(18f);
+        textView.setTextColor(Color.WHITE);
         textView.setText(righttext);
         ImageView imageView=new ImageView(context);
         layout.addView(imageView, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -137,5 +168,10 @@ public class NavigationBarView extends RelativeLayout {
             imageView.setImageDrawable(rightimg);
         }
         this.addView(layout,params);
+    }
+    public void setNaviDelegate(NavigationBarDelegate delegate){
+        if(delegate!=null){
+            this.delegate=delegate;
+        }
     }
 }

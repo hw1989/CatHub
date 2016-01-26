@@ -53,6 +53,7 @@ public class PathListAdapter extends RecyclerView.Adapter<PathListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.itemView.setTag(position);
         File file=list.get(position);
         holder.tv_name.setText(file.getAbsoluteFile().getName());
     }
@@ -74,29 +75,33 @@ public class PathListAdapter extends RecyclerView.Adapter<PathListAdapter.ViewHo
 //            View view2=itemView.findViewWithTag("img_"+getAdapterPosition());
 //            if(view1==null){
                 tv_name=(TextView)itemView.findViewById(R.id.tv_path_name);
-                tv_name.setTag("name_"+getAdapterPosition());
+                tv_name.setTag("name_"+getLayoutPosition());
 //            }else{
 //                tv_name=(TextView)view1;
 //            }
 //            if(view2==null){
                 iv_arrow=(ImageView)itemView.findViewById(R.id.iv_path_arrow);
-                iv_arrow.setTag("img_"+getAdapterPosition());
+                iv_arrow.setTag("img_"+getLayoutPosition());
 //            }else{
 //                iv_arrow=(ImageView)view2;
 //            }
+//            int p1=getPosition();
+//            int p2=getLayoutPosition();
+//            int p3=getAdapterPosition();
+//            itemView.setTag(getPosition());
             itemView.setOnClickListener(this);
-            itemView.setTag(getAdapterPosition());
         }
 
         @Override
         public void onClick(View v) {
             AddProjectActivity activity=(AddProjectActivity)PathListAdapter.this.context;
             Bundle bundle=new Bundle();
-//            int position=(int)v.getTag();
-//            bundle.putSerializable("local",list.get(getLayoutPosition()));
+            int position=(Integer)v.getTag();
+            bundle.putString("path", list.get(position).getAbsolutePath());
             Intent intent=new Intent(activity, NewProjectActivity.class);
             intent.putExtras(bundle);
             activity.startActivity(intent);
+            activity.finish();
         }
     }
     public void setDataSource(final File file){
