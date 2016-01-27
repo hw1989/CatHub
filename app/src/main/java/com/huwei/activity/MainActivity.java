@@ -1,6 +1,7 @@
 package com.huwei.activity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.GridLayoutManager;
@@ -42,7 +43,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     }
     private void initView(){
         adapter=new MainAdapter(this);
-        rv_project.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        if(getResources().getConfiguration().orientation== Configuration.ORIENTATION_PORTRAIT){
+            rv_project.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        }else{
+            rv_project.setLayoutManager(new GridLayoutManager(this,2));
+        }
         //固定大小
         rv_project.setHasFixedSize(true);
         rv_project.setAdapter(adapter);

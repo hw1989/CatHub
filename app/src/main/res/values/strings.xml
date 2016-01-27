@@ -29,4 +29,7 @@
     <string name="new_project_tip_addfail">项目添加失败!</string>
     <string name="new_project_tip_addsuccess">项目添加成功!</string>
     <string name="project_info_title">项目信息</string>
+    <string name="check_Project">查看项目</string>
+    <string name="check_source">查看源文件</string>
+    <string name="check_code">代码文件</string>
 </resources>
