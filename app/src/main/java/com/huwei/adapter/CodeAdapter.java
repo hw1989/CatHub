@@ -24,7 +24,7 @@ public class CodeAdapter  extends RecyclerView.Adapter<CodeAdapter.ViewHolder>{
     public CodeAdapter(Context context){
         this.context=context;
         this.inflater=LayoutInflater.from(context);
-        format=new DecimalFormat("    ");
+        format=new DecimalFormat("00000");
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -36,6 +36,7 @@ public class CodeAdapter  extends RecyclerView.Adapter<CodeAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tv_linenum.setText(format.format(position));
+        holder.tv_linecode.setText(list.get(position));
     }
 
     @Override

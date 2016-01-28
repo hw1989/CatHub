@@ -1,10 +1,12 @@
 package com.huwei.activity;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableStringBuilder;
 
 import com.huwei.adapter.CodeAdapter;
+import com.huwei.biz.JavaSpannableStringBuilder;
 import com.huwei.utils.MyLog;
 
 import org.wind.annotation.ActivityInject;
@@ -33,10 +35,13 @@ public class CodeActivity extends BaseActivity {
         ActivityInject.getInstance().setInject(this);
         String filesrc=getIntent().getStringExtra("code");
         file=new File(filesrc);
+        MyLog.printE(filesrc);
         initView();
     }
     public void initView(){
         adapter=new CodeAdapter(this);
+        rv_code.setHasFixedSize(true);
+        rv_code.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         rv_code.setAdapter(adapter);
     }
 
@@ -49,7 +54,7 @@ public class CodeActivity extends BaseActivity {
             reader=new BufferedReader(new InputStreamReader(new FileInputStream(file)));
             String code=null;
             while ((code=reader.readLine())!=null){
-                SpannableStringBuilder builder=new SpannableStringBuilder(code);
+                JavaSpannableStringBuilder builder=new JavaSpannableStringBuilder(code);
                 list.add(builder);
             }
         }catch (Exception ex){

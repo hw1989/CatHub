@@ -78,7 +78,7 @@ public class AllProjectAdapter  extends RecyclerView.Adapter<AllProjectAdapter.V
             }else{
                 AllFileActivity activity=(AllFileActivity)(AllProjectAdapter.this.context);
                 Intent intent=new Intent(activity, CodeActivity.class);
-                intent.putExtra("code",file.getName());
+                intent.putExtra("code",file.getAbsolutePath());
                 activity.startActivity(intent);
             }
         }
