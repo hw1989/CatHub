@@ -26,7 +26,7 @@ public class SettingComman {
 
         @Override
         public int getCodenote() {
-            return Color.parseColor("#7D8C93");
+            return Color.parseColor("#FF0053");
         }
 
         @Override

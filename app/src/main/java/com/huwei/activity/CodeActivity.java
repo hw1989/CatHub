@@ -7,6 +7,7 @@ import android.text.SpannableStringBuilder;
 
 import com.huwei.adapter.CodeAdapter;
 import com.huwei.biz.JavaSpannableStringBuilder;
+import com.huwei.comman.SettingComman;
 import com.huwei.utils.MyLog;
 
 import org.wind.annotation.ActivityInject;
@@ -35,7 +36,7 @@ public class CodeActivity extends BaseActivity {
         ActivityInject.getInstance().setInject(this);
         String filesrc=getIntent().getStringExtra("code");
         file=new File(filesrc);
-        MyLog.printE(filesrc);
+        this.rv_code.setBackgroundColor(SettingComman.AndroidStudio.getBackground());
         initView();
     }
     public void initView(){
