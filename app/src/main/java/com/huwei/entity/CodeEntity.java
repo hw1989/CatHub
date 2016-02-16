@@ -87,4 +87,37 @@ public class CodeEntity {
     private int symbol;
     //字符串 "" ''
     private int StrCode;
+
+    public int getDataType() {
+        return dataType;
+    }
+
+    public void setDataType(int dataType) {
+        this.dataType = dataType;
+    }
+
+    //数据类型
+    private int dataType;
+
+    public int getDataStr() {
+        return DataStr;
+    }
+
+    public void setDataStr(int dataStr) {
+        DataStr = dataStr;
+    }
+
+    //字符串
+    private int DataStr;
+
+    public int getNumber() {
+        return Number;
+    }
+
+    public void setNumber(int number) {
+        Number = number;
+    }
+
+    //数字
+    private int Number;
 }

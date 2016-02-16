@@ -53,5 +53,19 @@ public class SettingComman {
         public int getSymbol() {
             return Color.parseColor("#FFFFFF");
         }
+        @Override
+        public int getDataType(){
+            return Color.parseColor("#52E3F6");
+        }
+
+        @Override
+        public int getDataStr() {
+            return Color.parseColor("#ECE47E");
+        }
+
+        @Override
+        public int getNumber() {
+            return Color.parseColor("#C48CFF");
+        }
     };
 }
