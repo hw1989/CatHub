@@ -67,5 +67,10 @@ public class SettingComman {
         public int getNumber() {
             return Color.parseColor("#C48CFF");
         }
+
+        @Override
+        public int getInjectStr() {
+            return Color.parseColor("#FDCC9E");
+        }
     };
 }

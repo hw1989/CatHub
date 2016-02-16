@@ -120,4 +120,16 @@ public class CodeEntity {
 
     //数字
     private int Number;
+
+    public int getInjectStr() {
+        return injectStr;
+    }
+
+    public void setInjectStr(int injectStr) {
+        this.injectStr = injectStr;
+    }
+
+    //注解
+    private int injectStr;
+
 }

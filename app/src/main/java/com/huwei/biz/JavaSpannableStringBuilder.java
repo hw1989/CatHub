@@ -38,6 +38,8 @@ public class JavaSpannableStringBuilder extends BaseSpannableStringBuilder {
             initDataType();
             //
             initStrCode();
+            //注解字符串
+            initInject();
         }
 
     }
@@ -314,7 +316,12 @@ public class JavaSpannableStringBuilder extends BaseSpannableStringBuilder {
                 }
 
                 if("/".equals(s1)){
-                    s2=code.substring(code.length()-1);
+                    //获取第二个字符
+                    if(code.length()-1<i+2){
+                        return;
+                    }
+                    s2=code.substring(i+1,i+2);
+//                    s2=code.substring(code.length()-1);
                     if("/".equals(s2)){
                         start=i;
                         end=code.length();
@@ -356,7 +363,7 @@ public class JavaSpannableStringBuilder extends BaseSpannableStringBuilder {
         }
     }
     private void initNumber(){
-        Pattern pattern = Pattern.compile("(?:0|1|2|3|4|5|6|7|8|9|)");
+        Pattern pattern = Pattern.compile("(?:0|1|2|3|4|5|6|7|8|9)");
         Matcher matcher = pattern.matcher(code);
         while (matcher.find()) {
             int start = matcher.start();
@@ -396,6 +403,17 @@ public class JavaSpannableStringBuilder extends BaseSpannableStringBuilder {
                 }
             }
             ForegroundColorSpan span = new ForegroundColorSpan(SettingComman.AndroidStudio.getNumber());
+            this.setSpan(span, start, end, SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+    }
+    private void initInject(){
+//        Pattern pattern=Pattern.compile("(@.*? |\\(|)");
+        Pattern pattern=Pattern.compile("@[A-Za-z]+");
+        Matcher matcher=pattern.matcher(code);
+        while (matcher.find()){
+            int start = matcher.start();
+            int end = matcher.end();
+            ForegroundColorSpan span = new ForegroundColorSpan(SettingComman.AndroidStudio.getInjectStr());
             this.setSpan(span, start, end, SPAN_EXCLUSIVE_EXCLUSIVE);
         }
     }
