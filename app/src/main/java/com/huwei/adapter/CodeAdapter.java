@@ -1,6 +1,7 @@
 package com.huwei.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
@@ -21,10 +22,13 @@ public class CodeAdapter  extends RecyclerView.Adapter<CodeAdapter.ViewHolder>{
     private Context context=null;
     private LayoutInflater inflater=null;
     private DecimalFormat format=null;
+    //设置字体
+    private Typeface face=null;
     public CodeAdapter(Context context){
         this.context=context;
         this.inflater=LayoutInflater.from(context);
         format=new DecimalFormat("00000");
+        face=Typeface.createFromAsset(context.getAssets(),"DroidSansMono.ttf");
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -36,7 +40,13 @@ public class CodeAdapter  extends RecyclerView.Adapter<CodeAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tv_linenum.setText(format.format(position));
-        holder.tv_linecode.setText(list.get(position));
+        SpannableStringBuilder builder=list.get(position);
+        if(builder.toString().trim().length()>0){
+            holder.tv_linecode.setText(list.get(position));
+        }else{
+            holder.tv_linecode.setText("");
+        }
+
     }
 
     @Override
@@ -54,6 +64,10 @@ public class CodeAdapter  extends RecyclerView.Adapter<CodeAdapter.ViewHolder>{
             super(itemView);
             tv_linenum=(TextView)itemView.findViewById(R.id.tv_code_linenum);
             tv_linecode=(TextView)itemView.findViewById(R.id.tv_code_line);
+            tv_linenum.setVisibility(View.GONE);
+            if(face!=null){
+                tv_linecode.setTypeface(face);
+            }
         }
     }
     public void setDataSource(ArrayList<SpannableStringBuilder> list){

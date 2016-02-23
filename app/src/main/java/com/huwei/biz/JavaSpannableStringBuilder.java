@@ -1,5 +1,7 @@
 package com.huwei.biz;
 
+import android.content.Context;
+import android.graphics.Typeface;
 import android.text.style.ForegroundColorSpan;
 
 import com.huwei.comman.SettingComman;
@@ -24,6 +26,7 @@ public class JavaSpannableStringBuilder extends BaseSpannableStringBuilder {
     public JavaSpannableStringBuilder(String str) {
         super(str);
         this.code = str;
+        initForebg();
         //代码注释
 //        initCodeNote();
         initCode();
@@ -41,9 +44,11 @@ public class JavaSpannableStringBuilder extends BaseSpannableStringBuilder {
             //注解字符串
             initInject();
         }
-
     }
-
+    private void initForebg(){
+        ForegroundColorSpan span = new ForegroundColorSpan(SettingComman.AndroidStudio.getForeground());
+        this.setSpan(span, 0, code.length(), SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
     private void initModify() {
 //        Pattern pattern=Pattern.compile("(?:while|volatile|void|try|true|transient|throws|throw|this|synchronized|switch|super|strictfp|static|short|return|public|protected|private|package|null|new|native|long|interface|int|instanceof|import|implements|if|goto|for|float|finally|final|false|extends|enum|else|double|do|default|continue|const|class|char|catch|case|byte|break|boolean|assert|abstract)");
         Pattern pattern = Pattern.compile("(?:static|public|protected|private|package|new|native|import|default|const|abstract)");
